@@ -1,0 +1,7 @@
+# Archivos y carpetas ignorados por Git
+nbproject/private/
+build/
+dist/
+*.class
+*.log
+
