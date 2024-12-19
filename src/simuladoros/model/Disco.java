@@ -1,10 +1,10 @@
 package simuladoros.model;
 
-public class Memoria {
-    
+
+public class Disco {
     private double uso;
-    
-    public Memoria() {
+
+    public Disco() {
         this.uso = 0;
     }
 
@@ -20,6 +20,9 @@ public class Memoria {
 
     public void actualizarUso(int cantidad) {
         this.uso = Math.min(this.uso + cantidad, 100);
-        // Si la suma excede 100, se devuelve 100, de lo contrario, se devuelve la suma.
+    }
+
+    public void liberarUso(int cantidad) {
+        this.uso = Math.max(this.uso - cantidad, 0);
     }
 }

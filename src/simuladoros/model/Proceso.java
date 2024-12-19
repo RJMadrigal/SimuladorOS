@@ -6,12 +6,14 @@ public class Proceso {
     private int tiempoEjecucion;
     private int memoria;
     private int cpuUso;
+    private int disco;
     
-    public Proceso(String id, int tiempoEjecucion, int memoria, int cpuUso) {
+    public Proceso(String id, int tiempoEjecucion, int memoria, int cpuUso, int disco) {
         this.id = id;
         this.tiempoEjecucion = tiempoEjecucion;
         this.memoria = memoria;
         this.cpuUso = cpuUso;
+        this.disco = disco;
     }
 
     public String getId() {
@@ -30,6 +32,10 @@ public class Proceso {
         return cpuUso;
     }
 
+    public int getDisco() {
+        return disco;
+    }
+
     public void setTiempoEjecucion(int tiempoEjecucion) {
         this.tiempoEjecucion = tiempoEjecucion;
     }
@@ -41,4 +47,9 @@ public class Proceso {
     public void setCpuUso(int cpuUso) {
         this.cpuUso = cpuUso;
     }
+
+    public void setDisco(int disco) {
+        this.disco = cpuUso;
+    }
 }
+

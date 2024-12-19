@@ -19,5 +19,6 @@ public class CPU {
 
     public void actualizarUso(int cantidad) {
         this.uso = Math.min(this.uso + cantidad, 100);
+        // Si la suma excede 100, se devuelve 100, de lo contrario, se devuelve la suma.
     }
 }

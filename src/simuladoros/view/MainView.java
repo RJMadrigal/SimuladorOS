@@ -280,7 +280,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarProcesoActionPerformed
 
     private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRandomActionPerformed
-       Random rand = new Random();
+        Random rand = new Random();
         
         String id = "P" + (rand.nextInt(1000) + 1);  // id aleatorio
         int tiempo = rand.nextInt(10) + 1;  // tiempo de ejecución entre 1 y 500
@@ -293,6 +293,7 @@ public class MainView extends javax.swing.JFrame {
         controlador.agregarProceso(procesoAleatorio);
 
         actualizarVista();
+        
     }//GEN-LAST:event_btnRandomActionPerformed
 
     private void txtDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiscoActionPerformed
@@ -300,6 +301,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiscoActionPerformed
 
     private void actualizarVista() {
+        
         pbCPU.setValue((int) controlador.getCpu().getUso());
         pbMemoria.setValue((int) controlador.getMemoria().getUso());
         pbES.setValue((int) controlador.getDispositivos().getUso());
@@ -309,6 +311,7 @@ public class MainView extends javax.swing.JFrame {
         for (Proceso p : controlador.getProcesos()) {
             consola.append("ID: " + p.getId() + " - Tiempo: " + p.getTiempoEjecucion() + " - Memoria: " + p.getMemoria() + " - CPU: " + p.getCpuUso() + " - Disco: " + p.getDisco() + "\n");
         }
+        
     }
     
     public static void main(String args[]) {
