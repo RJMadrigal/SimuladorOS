@@ -12,7 +12,7 @@ public class MainView extends javax.swing.JFrame {
 
     public MainView() {
         initComponents();
-        controlador =  new SimuladorController();
+        controlador =  new SimuladorController(this);
     }
 
     
@@ -248,7 +248,8 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        // TODO add your handling code here:
+        controlador.simularProcesos();
+        actualizarVistaPeriodicamente();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnDetenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetenerActionPerformed
@@ -283,13 +284,12 @@ public class MainView extends javax.swing.JFrame {
         Random rand = new Random();
         
         String id = "P" + (rand.nextInt(1000) + 1);  // id aleatorio
-        int tiempo = rand.nextInt(10) + 1;  // tiempo de ejecución entre 1 y 500
-        int memoria = rand.nextInt(30) + 1;  // memoria entre 1 y 100 MB
-        int cpu = rand.nextInt(30) + 1;  // uso de CPU entre 1% y 100%
-        int disco = rand.nextInt(30) + 1;  // uso de CPU entre 1% y 100%
+        int tiempo = rand.nextInt(10) + 1;  // tiempo de ejecución entre 1 y 10
+        int memoria = rand.nextInt(30) + 1;  // memoria entre 1 y 30 MB
+        int cpu = rand.nextInt(30) + 1;  // uso de CPU entre 1% y 30%
+        int disco = rand.nextInt(30) + 1;  // uso de disco entre 1% y 30%
         
-
-        Proceso procesoAleatorio = new Proceso(id, tiempo, memoria, cpu,disco);
+        Proceso procesoAleatorio = new Proceso(id, tiempo, memoria, cpu, disco);
         controlador.agregarProceso(procesoAleatorio);
 
         actualizarVista();
@@ -300,8 +300,12 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiscoActionPerformed
 
+
+    public void mostrarMensaje(String mensaje) {
+        consola.append(mensaje + "\n");
+    }
+
     private void actualizarVista() {
-        
         pbCPU.setValue((int) controlador.getCpu().getUso());
         pbMemoria.setValue((int) controlador.getMemoria().getUso());
         pbES.setValue((int) controlador.getDispositivos().getUso());
@@ -311,7 +315,20 @@ public class MainView extends javax.swing.JFrame {
         for (Proceso p : controlador.getProcesos()) {
             consola.append("ID: " + p.getId() + " - Tiempo: " + p.getTiempoEjecucion() + " - Memoria: " + p.getMemoria() + " - CPU: " + p.getCpuUso() + " - Disco: " + p.getDisco() + "\n");
         }
-        
+    }
+
+    private void actualizarVistaPeriodicamente() {
+        new Thread(() -> {
+            while (!controlador.getProcesos().isEmpty()) {
+                actualizarVista();
+                try {
+                    Thread.sleep(1000); // Actualizar cada segundo
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            actualizarVista(); // Actualizar una última vez al final
+        }).start();
     }
     
     public static void main(String args[]) {
