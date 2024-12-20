@@ -1,19 +1,26 @@
 package simuladoros.model;
 
 public class Proceso {
-    
+
     private final String id;
     private int tiempoEjecucion;
     private int memoria;
     private int cpuUso;
     private int disco;
-    
+    private Estado estado;  
+
+    // Enum para los cinco estados
+    public enum Estado {
+        NUEVO, LISTO, EJECUTANDO, BLOQUEADO, TERMINADO
+    }
+
     public Proceso(String id, int tiempoEjecucion, int memoria, int cpuUso, int disco) {
         this.id = id;
         this.tiempoEjecucion = tiempoEjecucion;
         this.memoria = memoria;
         this.cpuUso = cpuUso;
         this.disco = disco;
+        this.estado = Estado.NUEVO;  // Estado inicial
     }
 
     public String getId() {
@@ -36,20 +43,11 @@ public class Proceso {
         return disco;
     }
 
-    public void setTiempoEjecucion(int tiempoEjecucion) {
-        this.tiempoEjecucion = tiempoEjecucion;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setMemoria(int memoria) {
-        this.memoria = memoria;
-    }
-
-    public void setCpuUso(int cpuUso) {
-        this.cpuUso = cpuUso;
-    }
-
-    public void setDisco(int disco) {
-        this.disco = cpuUso;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 }
-

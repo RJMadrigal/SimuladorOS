@@ -1,10 +1,10 @@
-
 package simuladoros.view;
 
+import java.util.Iterator;
 import java.util.Random;
+import javax.swing.SwingUtilities;
 import simuladoros.controller.SimuladorController;
 import simuladoros.model.Proceso;
-
 
 public class MainView extends javax.swing.JFrame {
 
@@ -12,10 +12,9 @@ public class MainView extends javax.swing.JFrame {
 
     public MainView() {
         initComponents();
-        controlador =  new SimuladorController(this);
+        controlador = new SimuladorController(this);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,6 +45,11 @@ public class MainView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         pbDisco = new javax.swing.JProgressBar();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        runtime = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +84,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabel1.setText("ID Proceso");
 
-        jLabel2.setText("Proceso");
+        jLabel2.setText("Tiempo EXE");
 
         jLabel3.setText("CPU");
 
@@ -143,7 +147,7 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDisco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(btnAgregarProceso)
                 .addContainerGap())
         );
@@ -181,6 +185,16 @@ public class MainView extends javax.swing.JFrame {
 
         jLabel8.setText("Espacio en disco");
 
+        runtime.setColumns(20);
+        runtime.setRows(5);
+        jScrollPane2.setViewportView(runtime);
+
+        jLabel10.setText("FIFO ");
+
+        jLabel11.setText("Cola de procesos");
+
+        jLabel12.setText("Runtime");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,42 +202,56 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pbCPU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(pbMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pbES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(pbDisco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(btnIniciar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetener)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnReiniciar))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pbCPU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(pbMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(100, 100, 100)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pbES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(pbDisco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(0, 209, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addGap(293, 293, 293))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnIniciar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDetener)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnReiniciar)
+                                .addGap(269, 269, 269)))))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciar)
                     .addComponent(btnDetener)
                     .addComponent(btnReiniciar))
-                .addGap(57, 57, 57)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel5))
@@ -239,9 +267,21 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pbMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pbDisco, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(167, 167, 167))))
         );
 
         pack();
@@ -272,7 +312,7 @@ public class MainView extends javax.swing.JFrame {
         int tiempo = Integer.parseInt(txtProceso.getText());
         int memoria = Integer.parseInt(txtMemoria.getText());
         int cpu = Integer.parseInt(txtCPU.getText());
-        int disco = Integer.parseInt(txtDisco.getText());
+        int disco = memoria;
 
         Proceso proceso = new Proceso(id, tiempo, memoria, cpu, disco);
         controlador.agregarProceso(proceso);
@@ -282,40 +322,46 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRandomActionPerformed
         Random rand = new Random();
-        
+
         String id = "P" + (rand.nextInt(1000) + 1);  // id aleatorio
-        int tiempo = rand.nextInt(10) + 1;  // tiempo de ejecución entre 1 y 10
+        int tiempo = rand.nextInt(5) + 1;  // tiempo de ejecución entre 1 y 10
         int memoria = rand.nextInt(30) + 1;  // memoria entre 1 y 30 MB
         int cpu = rand.nextInt(30) + 1;  // uso de CPU entre 1% y 30%
-        int disco = rand.nextInt(30) + 1;  // uso de disco entre 1% y 30%
-        
+        int disco = memoria;  // uso de disco entre 1% y 30%
+
+        System.out.println("memoria creada para proceso: " + memoria);
         Proceso procesoAleatorio = new Proceso(id, tiempo, memoria, cpu, disco);
         controlador.agregarProceso(procesoAleatorio);
 
         actualizarVista();
-        
+
     }//GEN-LAST:event_btnRandomActionPerformed
 
     private void txtDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiscoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiscoActionPerformed
 
-
     public void mostrarMensaje(String mensaje) {
-        consola.append(mensaje + "\n");
+        runtime.append(mensaje + "\n");
     }
 
     private void actualizarVista() {
-        pbCPU.setValue((int) controlador.getCpu().getUso());
-        pbMemoria.setValue((int) controlador.getMemoria().getUso());
-        pbES.setValue((int) controlador.getDispositivos().getUso());
-        pbDisco.setValue((int) controlador.getDisco().getUso());
+    pbCPU.setValue((int) controlador.getCpu().getUso());
+    pbMemoria.setValue((int) controlador.getMemoria().getUso());
+    pbES.setValue((int) controlador.getDispositivos().getUso());
+    pbDisco.setValue((int) controlador.getDisco().getUso());
 
-        consola.setText("");
-        for (Proceso p : controlador.getProcesos()) {
+    // Usar un Iterador para evitar ConcurrentModificationException
+    SwingUtilities.invokeLater(() -> {
+        consola.setText(""); // Limpiar consola antes de agregar el texto actualizado
+
+        Iterator<Proceso> iterator = controlador.getProcesos().iterator();
+        while (iterator.hasNext()) {
+            Proceso p = iterator.next();
             consola.append("ID: " + p.getId() + " - Tiempo: " + p.getTiempoEjecucion() + " - Memoria: " + p.getMemoria() + " - CPU: " + p.getCpuUso() + " - Disco: " + p.getDisco() + "\n");
         }
-    }
+    });
+}
 
     private void actualizarVistaPeriodicamente() {
         new Thread(() -> {
@@ -327,12 +373,13 @@ public class MainView extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             }
+            
             actualizarVista(); // Actualizar una última vez al final
         }).start();
     }
-    
+
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainView().setVisible(true);
@@ -348,6 +395,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton btnReiniciar;
     private javax.swing.JTextArea consola;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -358,10 +408,12 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JProgressBar pbCPU;
     private javax.swing.JProgressBar pbDisco;
     private javax.swing.JProgressBar pbES;
     private javax.swing.JProgressBar pbMemoria;
+    private javax.swing.JTextArea runtime;
     private javax.swing.JTextField txtCPU;
     private javax.swing.JTextField txtDisco;
     private javax.swing.JTextField txtIDProceso;
